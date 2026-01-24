@@ -97,3 +97,6 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+/GGJ_2026/Library
+/GGJ_2026/Temp
+/GGJ_2026/UserSettings
