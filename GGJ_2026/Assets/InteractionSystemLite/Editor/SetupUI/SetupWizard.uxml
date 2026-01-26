@@ -1,0 +1,43 @@
+<UXML xmlns="UnityEngine.UIElements">
+    <ScrollView name="RootScroll">
+
+        <VisualElement name="Header" class="header-container">
+            <Label name="Title" class="title-label" text="Interaction System Lite" />
+            <Label name="Subtitle" class="subtitle-label" text="Quick Setup Wizard" />
+        </VisualElement>
+
+        <VisualElement class="section">
+            <Label class="section-title" text="Step 1 - Add Interaction Controller" />
+            <Button name="AddInteractionControllerBtn" text="Add to Selected Player" />
+        </VisualElement>
+
+        <VisualElement class="section">
+            <Label class="section-title" text="Step 2 - Add Prompt UI (uGUI)" />
+            <Button name="AddPromptUIBtn" text="Create Interaction Prompt UI" />
+        </VisualElement>
+
+        <VisualElement class="section">
+    	    <Label class="section-title" text="Step 3.a - Add Detectors" />
+    	    <Button name="AddRaycastBtn" text="Add Raycast Detector to - Player" />
+    	    <Button name="AddProximityBtn" text="Add Proximity Detector to - Object" />
+	</VisualElement>
+
+	<VisualElement class="section">
+            <Label class="section-title" text="Step 3.b - Create Interactable Prefabs" />
+    	    <VisualElement style="flex-direction: row; gap: 6px;">
+                 <Button name="CreateButtonPrefabBtn" text="Button" />
+                 <Button name="CreateDoorPrefabBtn" text="Door" />
+                 <Button name="CreatePickupPrefabBtn" text="Pickup" />
+    	     </VisualElement>
+	</VisualElement>
+
+
+        <VisualElement class="section">
+            <Label class="section-title" text="Step 4 - Import Demo Scenes" />
+            <VisualElement style="flex-direction: row;">
+                <Button name="ImportButtonDemoBtn" text="Button Demo" />
+                <Button name="ImportDialogueDemoBtn" text="Dialogue Demo" />
+            </VisualElement>
+        </VisualElement>
+    </ScrollView>
+</UXML>
