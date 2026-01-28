@@ -309,6 +309,11 @@ MonoBehaviour:
   timeToStop: 0.08
   inputDeadZone: 0.1
   moveAction: {fileID: 1426189984}
+  visualRoot: {fileID: 1541489672}
+  wiggleRot: 6
+  wiggleX: 0.06
+  wiggleSpeed: 0.12
+  wiggleMoveThreshold: 0.15
 --- !u!50 &165655416
 Rigidbody2D:
   serializedVersion: 5

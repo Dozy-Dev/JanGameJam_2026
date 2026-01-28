@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,10 +25,28 @@ public class PlayerMovementController : MonoBehaviour
 
     public bool FacingRight { get; private set; } = true;
 
+    [Header("Placeholder Wiggle (DOTween)")]
+    [SerializeField] private Transform visualRoot;
+    [SerializeField] private float wiggleRot = 6f;
+    [SerializeField] private float wiggleX = 0.06f;
+    [SerializeField] private float wiggleSpeed = 0.12f;
+    [SerializeField] private float wiggleMoveThreshold = 0.15f;
+
+    private Tween wiggleTween;
+    private Vector3 visualStartLocalPos;
+    private Quaternion visualStartLocalRot;
+    private bool isWiggling;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
+
+        if (visualRoot == null)
+            visualRoot = transform;
+
+        visualStartLocalPos = visualRoot.localPosition;
+        visualStartLocalRot = visualRoot.localRotation;
     }
 
     private void OnEnable()
@@ -59,6 +78,7 @@ public class PlayerMovementController : MonoBehaviour
     private void FixedUpdate()
     {
         ApplyMovement2D();
+        UpdateWiggle();
     }
 
     private void ApplyMovement2D()
@@ -104,6 +124,51 @@ public class PlayerMovementController : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             smoothVelX = 0f;
             smoothVelY = 0f;
+            StopWiggle();
         }
     }
+
+
+    private void UpdateWiggle()
+    {
+        if (visualRoot == null) return;
+
+        // Use actual velocity so it wiggles when shoved, not just when input is held
+        float speed = rb.linearVelocity.magnitude;
+
+        if (speed > wiggleMoveThreshold && !isWiggling)
+            StartWiggle();
+        else if (speed <= wiggleMoveThreshold && isWiggling)
+            StopWiggle();
+    }
+
+    private void StartWiggle()
+    {
+        isWiggling = true;
+
+        wiggleTween?.Kill();
+
+        Sequence seq = DOTween.Sequence();
+
+        seq.Append(visualRoot.DOLocalMoveX(visualStartLocalPos.x + wiggleX, wiggleSpeed).SetEase(Ease.InOutSine));
+        seq.Join(visualRoot.DOLocalRotate(new Vector3(0f, 0f, wiggleRot), wiggleSpeed).SetEase(Ease.InOutSine));
+
+        seq.Append(visualRoot.DOLocalMoveX(visualStartLocalPos.x - wiggleX, wiggleSpeed).SetEase(Ease.InOutSine));
+        seq.Join(visualRoot.DOLocalRotate(new Vector3(0f, 0f, -wiggleRot), wiggleSpeed).SetEase(Ease.InOutSine));
+
+        seq.SetLoops(-1, LoopType.Restart);
+        wiggleTween = seq;
+    }
+
+    private void StopWiggle()
+    {
+        isWiggling = false;
+
+        wiggleTween?.Kill();
+        wiggleTween = null;
+
+        visualRoot.DOLocalMove(visualStartLocalPos, 0.10f).SetEase(Ease.OutSine);
+        visualRoot.DOLocalRotateQuaternion(visualStartLocalRot, 0.10f).SetEase(Ease.OutSine);
+    }
+
 }
