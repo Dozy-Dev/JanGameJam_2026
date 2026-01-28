@@ -1,0 +1,27 @@
+{
+    "name": "com.cedarrose.interactionsystemlite",
+  "version": "1.0.0",
+  "displayName": "Interaction System Lite",
+  "description": "Lightweight, flexible interaction system for Unity 6...",
+  "unity": "6000.0",
+  "author": {
+        "name": "Cedar Rose"
+  },
+  "samples": [
+    {
+        "displayName": "Button Interactable Demo",
+      "description": "Scene demonstrating button interactions",
+      "path": "Samples~/ButtonDemo"
+    },
+    {
+        "displayName": "Dialogue Interactable Demo",
+      "description": "Scene demonstrating NPC dialogue",
+      "path": "Samples~/DialogueDemo"
+    },
+    {
+        "displayName": "Door Interactable Demo",
+      "description": "Scene demonstrating Opening and Closing Doors",
+      "path": "Samples~/DoorDemo"
+    }
+  ]
+}
