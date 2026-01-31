@@ -105,6 +105,7 @@ public class EnemyMovementAI : MonoBehaviour
         {
             Vector2 dir = toPlayer.normalized;
             desiredVel = dir * Mathf.Sign(delta) * moveSpeed;
+            Debug.Log(desiredVel);
         }
 
         Vector2 v = rb.linearVelocity;
@@ -129,5 +130,10 @@ public class EnemyMovementAI : MonoBehaviour
 
         AttackTicketManager.Instance.ReleaseTicket(ticketID);
         hasTicket = false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.gameObject.name);
     }
 }
