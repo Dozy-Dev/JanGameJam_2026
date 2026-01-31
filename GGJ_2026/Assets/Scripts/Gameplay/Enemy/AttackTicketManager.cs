@@ -6,23 +6,35 @@ public enum AttackSide { Left, Right }
 
 public class AttackTicketManager : MonoBehaviour
 {
-    public static AttackTicketManager Instance { get; private set; }
+    public static AttackTicketManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                // Find existing instance
+                _instance = FindFirstObjectByType<AttackTicketManager>();
+
+                // If no instance was found, create one
+                if (_instance == null)
+                {
+                    GameObject singleton = new GameObject("AttackTicketManager");
+                    _instance = singleton.AddComponent<AttackTicketManager>();
+                }
+            }
+            return _instance;
+        }
+    }
+
+    private static AttackTicketManager _instance;
+
+
     [Header("Side Capacity, in points")]
     [SerializeField] private int leftSideCapacityPoints = 2;
     [SerializeField] private int rightSideCapacityPoints = 2;
 
     private readonly Dictionary<Guid, Ticket> activeTickets = new();
     private int leftUsedPoints, rightUsedPoints = 0;
-
-    private void Awake()
-    {
-        if(Instance != null && Instance != this)
-        {
-            Destroy(this.gameObject);
-            return;
-        }
-        Instance = this;
-    }
 
     public bool TryAcquireTicket(Guid ticketID, AttackSide side, int cost, out Ticket ticket)
     {

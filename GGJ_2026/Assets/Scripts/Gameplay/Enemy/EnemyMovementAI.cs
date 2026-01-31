@@ -30,6 +30,7 @@ public class EnemyMovementAI : MonoBehaviour
     private float nextTicketRequestTime = 0f;
     private float holdUntilTime = 0f;
     private bool hasTicket = false;
+    private bool hasReachedPlayer = false;
 
     private void Awake()
     {
@@ -65,9 +66,8 @@ public class EnemyMovementAI : MonoBehaviour
         Vector2 toPlayer = playerTransform.position - transform.position;
         float distanceToPlayer = toPlayer.magnitude;
 
-        if(distanceToPlayer > tetherRange)
+        if(distanceToPlayer > tetherRange && hasReachedPlayer)
         {
-            //idk just be a zombie or something
             ReleaseTicket();
             rb.linearVelocity = Vector2.zero;
             return;
@@ -82,6 +82,7 @@ public class EnemyMovementAI : MonoBehaviour
         else if (hasTicket && Time.time >= holdUntilTime && distanceToPlayer <= attackRange)
         {
             //We're in attack range, hold and then release.
+            hasReachedPlayer = true;
             ReleaseTicket();
         }
 
@@ -105,7 +106,6 @@ public class EnemyMovementAI : MonoBehaviour
         {
             Vector2 dir = toPlayer.normalized;
             desiredVel = dir * Mathf.Sign(delta) * moveSpeed;
-            Debug.Log(desiredVel);
         }
 
         Vector2 v = rb.linearVelocity;
@@ -130,6 +130,7 @@ public class EnemyMovementAI : MonoBehaviour
 
         AttackTicketManager.Instance.ReleaseTicket(ticketID);
         hasTicket = false;
+        hasReachedPlayer = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
