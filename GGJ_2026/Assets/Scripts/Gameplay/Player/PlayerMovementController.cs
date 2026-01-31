@@ -23,6 +23,16 @@ public class PlayerMovementController : MonoBehaviour
     private float smoothVelX;
     private float smoothVelY;
 
+    [Header("Attack")]
+    [SerializeField] private InputActionReference punchAction;
+
+    [Header("Jump")]
+    [SerializeField] private InputActionReference jumpAction;
+    private bool jumping = false;
+    private bool falling = false;
+    [SerializeField] private float jumpMovementSpeed = 9f;
+    [SerializeField] private float fallingMovementSpeed = 18f;
+
     public bool FacingRight { get; private set; } = true;
 
     [Header("Placeholder Wiggle (DOTween)")]
@@ -47,18 +57,34 @@ public class PlayerMovementController : MonoBehaviour
 
         visualStartLocalPos = visualRoot.localPosition;
         visualStartLocalRot = visualRoot.localRotation;
+
+        punchAction.ToInputAction().performed += ctx => PerformPunch();
+
+        jumpAction.ToInputAction().performed += ctx => PerformJump();
     }
 
     private void OnEnable()
     {
         if (moveAction != null)
             moveAction.action.Enable();
+
+        if(punchAction != null)
+            punchAction.action.Enable();
+
+        if (jumpAction != null)
+            jumpAction.action.Enable();
     }
 
     private void OnDisable()
     {
         if (moveAction != null)
             moveAction.action.Disable();
+
+        if(punchAction != null)
+            punchAction.action.Disable();
+
+        if (jumpAction != null)
+            jumpAction.action.Disable();
     }
 
     private void Update()
@@ -73,12 +99,33 @@ public class PlayerMovementController : MonoBehaviour
         moveInput = Vector2.ClampMagnitude(moveInput, 1f);
 
         UpdateFacing(moveInput.x);
+
     }
 
     private void FixedUpdate()
     {
         ApplyMovement2D();
         UpdateWiggle();
+    }
+
+    private void PerformPunch()
+    {
+        // player animation
+        if (visualRoot != null)
+        {
+            Animator anim;
+            if (visualRoot.TryGetComponent<Animator>(out anim))
+            {
+                anim.SetTrigger("Punch");
+            }
+        }
+    }
+
+    private void PerformJump()
+    {
+        jumping = true;
+        rb.AddForceY(jumpMovementSpeed, ForceMode2D.Impulse);
+        //call animation
     }
 
     private void ApplyMovement2D()

@@ -17,7 +17,7 @@ public class StageAdvanceZone : MonoBehaviour
     {
         if( collision.CompareTag("Player"))
         {
-            Vector3 lockedPos = new Vector3(transform.position.x, 0, -1);
+            Vector3 lockedPos = new Vector3(transform.position.x, transform.position.y, -1);
             CamRig.LockStage(lockedPos);
         }
     }
