@@ -12,8 +12,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Gameplay.unity
     guid: cfe2c9a27ece75d4fbb87f6c0c33ff19
   - enabled: 1
+    path: Assets/Scenes/Antons Playground.unity
+    guid: 8ebb61c8055a57a48b23be50fcfa1784
+  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 7a08ad4334abdf64f8e00a85b6d1257b
+  - enabled: 1
+    path: Assets/Scenes/Devans Playground.unity
+    guid: af1e267db78c1454c95c1333f2de4e27
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

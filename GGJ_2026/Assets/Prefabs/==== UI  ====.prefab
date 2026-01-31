@@ -308,6 +308,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8733741801809525944}
+  - component: {fileID: 5889949942689598391}
   m_Layer: 0
   m_Name: ==== UI  ====
   m_TagString: Untagged
@@ -332,6 +333,21 @@ Transform:
   - {fileID: 7647899966016139968}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5889949942689598391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3982461671414481750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 043b6349152f0e54883b00b1d4b46769, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseController
+  isPaused: 0
+  PausedCanvas: {fileID: 6234827219343944137}
+  escapeAction: {fileID: 0}
 --- !u!1 &5058794283260740332
 GameObject:
   m_ObjectHideFlags: 0

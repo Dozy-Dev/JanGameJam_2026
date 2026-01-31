@@ -553,7 +553,7 @@ BoxCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0.25, y: 0.22999999, z: 0.19, w: 0.25}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2.56, y: 2.56}
     newSize: {x: 1, y: 1}
@@ -1544,8 +1544,35 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3982461671414481750, guid: be03c59ae3b13e04fa92767cc8b260ae, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 614504726955522819}
   m_SourcePrefab: {fileID: 100100000, guid: be03c59ae3b13e04fa92767cc8b260ae, type: 3}
+--- !u!1 &614504726955522817 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3982461671414481750, guid: be03c59ae3b13e04fa92767cc8b260ae, type: 3}
+  m_PrefabInstance: {fileID: 614504726955522816}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &614504726955522818 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6234827219343944137, guid: be03c59ae3b13e04fa92767cc8b260ae, type: 3}
+  m_PrefabInstance: {fileID: 614504726955522816}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &614504726955522819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614504726955522817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 043b6349152f0e54883b00b1d4b46769, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseController
+  isPaused: 0
+  PausedCanvas: {fileID: 614504726955522818}
 --- !u!1001 &9099675384815131992
 PrefabInstance:
   m_ObjectHideFlags: 0
