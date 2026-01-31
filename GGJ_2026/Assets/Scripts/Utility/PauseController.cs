@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PauseController : MonoBehaviour
@@ -47,10 +48,12 @@ public class PauseController : MonoBehaviour
             {
                 Time.timeScale = 0;
                 PausedCanvas.SetActive(true);
+                GameEventSystem.Instance.TriggerEvent(GameEvent.Paused, true);
             } else
             {
                 Time.timeScale = 1;
                 PausedCanvas.SetActive(false);
+                GameEventSystem.Instance.TriggerEvent(GameEvent.Paused, false);
             }
         }
     }

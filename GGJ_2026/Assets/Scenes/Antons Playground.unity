@@ -908,6 +908,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1574120625}
     - target: {fileID: 4033180022192251456, guid: b07d6eb12c4ac7a4da0ace9da315bea7, type: 3}
+      propertyPath: kickAction
+      value: 
+      objectReference: {fileID: 1639719968}
+    - target: {fileID: 4033180022192251456, guid: b07d6eb12c4ac7a4da0ace9da315bea7, type: 3}
       propertyPath: moveAction
       value: 
       objectReference: {fileID: 1877943427}
@@ -1376,6 +1380,20 @@ BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 5657007603071755314, guid: 63b8cbd6a7672924ea5c6dd0ae4c8de2, type: 3}
   m_PrefabInstance: {fileID: 14435713}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1508251392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
+  m_Name: Player/Escape
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
+  m_Asset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_ActionId: d58e9566-fab6-4654-97c0-2ca963f61615
 --- !u!114 &1574120625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1390,6 +1408,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
   m_Asset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_ActionId: f1ba0d36-48eb-4cd5-b651-1c94a6531f70
+--- !u!114 &1639719968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
+  m_Name: Player/HeavyAttack
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
+  m_Asset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_ActionId: 691126ba-a06d-441d-85c5-8df5a61dde6e
 --- !u!114 &1877943427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1501,6 +1533,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ==== UI  ====
       objectReference: {fileID: 0}
+    - target: {fileID: 5889949942689598391, guid: be03c59ae3b13e04fa92767cc8b260ae, type: 3}
+      propertyPath: escapeAction
+      value: 
+      objectReference: {fileID: 1508251392}
     - target: {fileID: 8733741801809525944, guid: be03c59ae3b13e04fa92767cc8b260ae, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1544,35 +1580,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3982461671414481750, guid: be03c59ae3b13e04fa92767cc8b260ae, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 614504726955522819}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be03c59ae3b13e04fa92767cc8b260ae, type: 3}
---- !u!1 &614504726955522817 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3982461671414481750, guid: be03c59ae3b13e04fa92767cc8b260ae, type: 3}
-  m_PrefabInstance: {fileID: 614504726955522816}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &614504726955522818 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6234827219343944137, guid: be03c59ae3b13e04fa92767cc8b260ae, type: 3}
-  m_PrefabInstance: {fileID: 614504726955522816}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &614504726955522819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 614504726955522817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 043b6349152f0e54883b00b1d4b46769, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PauseController
-  isPaused: 0
-  PausedCanvas: {fileID: 614504726955522818}
 --- !u!1001 &9099675384815131992
 PrefabInstance:
   m_ObjectHideFlags: 0
