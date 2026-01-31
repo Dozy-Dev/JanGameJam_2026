@@ -26,13 +26,6 @@ public class PlayerMovementController : MonoBehaviour
     [Header("Attack")]
     [SerializeField] private InputActionReference punchAction;
 
-    [Header("Jump")]
-    [SerializeField] private InputActionReference jumpAction;
-    private bool jumping = false;
-    private bool falling = false;
-    [SerializeField] private float jumpMovementSpeed = 9f;
-    [SerializeField] private float fallingMovementSpeed = 18f;
-
     public bool FacingRight { get; private set; } = true;
 
     [Header("Placeholder Wiggle (DOTween)")]
@@ -58,9 +51,7 @@ public class PlayerMovementController : MonoBehaviour
         visualStartLocalPos = visualRoot.localPosition;
         visualStartLocalRot = visualRoot.localRotation;
 
-        punchAction.ToInputAction().performed += ctx => PerformPunch();
-
-        jumpAction.ToInputAction().performed += ctx => PerformJump();
+        //punchAction.ToInputAction().performed += ctx => PerformPunch();
     }
 
     private void OnEnable()
@@ -70,9 +61,6 @@ public class PlayerMovementController : MonoBehaviour
 
         if(punchAction != null)
             punchAction.action.Enable();
-
-        if (jumpAction != null)
-            jumpAction.action.Enable();
     }
 
     private void OnDisable()
@@ -82,9 +70,6 @@ public class PlayerMovementController : MonoBehaviour
 
         if(punchAction != null)
             punchAction.action.Disable();
-
-        if (jumpAction != null)
-            jumpAction.action.Disable();
     }
 
     private void Update()
@@ -119,13 +104,6 @@ public class PlayerMovementController : MonoBehaviour
                 anim.SetTrigger("Punch");
             }
         }
-    }
-
-    private void PerformJump()
-    {
-        jumping = true;
-        rb.AddForceY(jumpMovementSpeed, ForceMode2D.Impulse);
-        //call animation
     }
 
     private void ApplyMovement2D()
