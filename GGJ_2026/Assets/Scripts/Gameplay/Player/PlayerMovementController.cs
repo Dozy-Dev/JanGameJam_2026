@@ -25,6 +25,7 @@ public class PlayerMovementController : MonoBehaviour
 
     [Header("Attack")]
     [SerializeField] private InputActionReference punchAction;
+    [SerializeField] private InputActionReference kickAction;
 
     public bool FacingRight { get; private set; } = true;
 
@@ -51,7 +52,8 @@ public class PlayerMovementController : MonoBehaviour
         visualStartLocalPos = visualRoot.localPosition;
         visualStartLocalRot = visualRoot.localRotation;
 
-        //punchAction.ToInputAction().performed += ctx => PerformPunch();
+        punchAction.ToInputAction().performed += ctx => PerformPunch();
+        kickAction.ToInputAction().performed += ctx => PerformKick();
     }
 
     private void OnEnable()
@@ -102,6 +104,18 @@ public class PlayerMovementController : MonoBehaviour
             if (visualRoot.TryGetComponent<Animator>(out anim))
             {
                 anim.SetTrigger("Punch");
+            }
+        }
+    }
+
+    private void PerformKick()
+    {
+        if(visualRoot != null)
+        {
+            Animator anim;
+            if (visualRoot.TryGetComponent<Animator>(out anim))
+            {
+                anim.SetTrigger("Kick");
             }
         }
     }

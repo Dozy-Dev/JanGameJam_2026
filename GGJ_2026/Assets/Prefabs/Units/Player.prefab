@@ -358,12 +358,10 @@ MonoBehaviour:
   inputDeadZone: 0.1
   moveAction: {fileID: 0}
   punchAction: {fileID: 0}
-  jumpAction: {fileID: 0}
-  jumpMovementSpeed: 9
-  fallingMovementSpeed: 18
+  kickAction: {fileID: 0}
   visualRoot: {fileID: 4664551514869905133}
   wiggleRot: 6
-  wiggleX: 0.06
+  wiggleX: 0.05
   wiggleSpeed: 0.12
   wiggleMoveThreshold: 0.15
 --- !u!50 &4105499286767146909
