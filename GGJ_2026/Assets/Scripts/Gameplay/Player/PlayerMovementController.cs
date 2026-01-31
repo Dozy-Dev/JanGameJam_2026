@@ -87,6 +87,15 @@ public class PlayerMovementController : MonoBehaviour
         if (input.magnitude < inputDeadZone)
             input = Vector2.zero;
 
+        if( visualRoot != null)
+        {
+            Animator anim;
+            if( visualRoot.TryGetComponent<Animator>(out anim))
+            {
+                anim.SetFloat("MoveSpeed", input.magnitude);
+            }
+        }
+
         float targetVX = input.x * moveSpeedX;
         float targetVY = input.y * moveSpeedY;
 

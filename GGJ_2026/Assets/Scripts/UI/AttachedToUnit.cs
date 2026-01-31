@@ -3,19 +3,22 @@ using UnityEngine;
 public class AttachedToUnit : MonoBehaviour
 {
     [SerializeField] private GameObject _attachedToUnit;
-    private Vector3 _prevPosition;
+    private Vector3 _offsetPosition;
 
     private void Start()
     {
-        _prevPosition = _attachedToUnit.transform.position;
+        _offsetPosition = _attachedToUnit.transform.position - transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 delta = _attachedToUnit.transform.position - _prevPosition;
-        transform.position += delta;
-
-        _prevPosition = _attachedToUnit.transform.position;
+        if( _attachedToUnit.transform.localScale.x < 0f )
+        {
+            transform.localScale = new Vector3(-1f,1,1);
+        } else
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
     }
 }
