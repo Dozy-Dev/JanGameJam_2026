@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using ProgressGraph;
 
 public class SceneController : MonoBehaviour
 {
@@ -15,6 +16,17 @@ public class SceneController : MonoBehaviour
         {
             StartCoroutine(DelayLoad(DelayTimer)); // Start the coroutine with a delay
         }
+    }
+
+    public void SetStageCompletedFlag(string flagName)
+    {
+        Progress.TrySet(flagName);
+    }
+
+    public void DelayLoad(string scene)
+    {
+        SceneToLoad = scene;
+        StartCoroutine(DelayLoad(DelayTimer)); // Start the coroutine with a delay
     }
 
     // The coroutine function
