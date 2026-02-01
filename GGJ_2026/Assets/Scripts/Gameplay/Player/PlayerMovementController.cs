@@ -41,6 +41,8 @@ public class PlayerMovementController : MonoBehaviour
     private Quaternion visualStartLocalRot;
     private bool isWiggling;
 
+    AudioSource sfxSource;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -54,6 +56,8 @@ public class PlayerMovementController : MonoBehaviour
 
         punchAction.ToInputAction().performed += ctx => PerformPunch();
         kickAction.ToInputAction().performed += ctx => PerformKick();
+
+        sfxSource = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -124,7 +128,10 @@ public class PlayerMovementController : MonoBehaviour
     {
         Vector2 input = moveInput;
         if (input.magnitude < inputDeadZone)
+        {
             input = Vector2.zero;
+            sfxSource.Stop();
+        }
 
         if( visualRoot != null)
         {
@@ -133,6 +140,10 @@ public class PlayerMovementController : MonoBehaviour
             {
                 anim.SetFloat("MoveSpeed", input.magnitude);
             }
+        }
+        if(input.magnitude > 0 && !sfxSource.isPlaying)
+        {
+            sfxSource.Play();
         }
 
         float targetVX = input.x * moveSpeedX;

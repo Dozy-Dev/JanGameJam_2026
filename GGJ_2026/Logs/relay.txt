@@ -1322,3 +1322,82 @@
 [2026-02-01T18:27:37.988Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
 [2026-02-01T18:27:37.988Z] [INFO] Auto-shutdown timer started due to client disconnection
 [2026-02-01T18:28:26.340Z] [INFO] Unity client connected with ID: editor-116516-tmanj6
+[2026-02-01T18:45:28.702Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-01T18:45:28.703Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-01T18:45:28.703Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-01T18:46:00.792Z] [INFO] Unity client connected with ID: editor-116516-ge3k3g
+[2026-02-01T19:19:11.913Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-01T19:19:11.913Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-01T19:19:11.913Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-01T19:19:45.309Z] [INFO] Unity client connected with ID: editor-116516-eyckbk
+[2026-02-01T19:24:26.261Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-01T19:24:26.261Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-01T19:24:26.261Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-01T19:24:57.450Z] [INFO] Unity client connected with ID: editor-116516-qynh6w
+[2026-02-01T19:25:15.481Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-01T19:25:15.481Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-01T19:25:15.481Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-01T19:28:15.489Z] [INFO] Shutdown: Initiating graceful shutdown: Dedicated client disconnected
+[2026-02-01T19:34:17.389Z] [INFO] === RELAY SERVER STARTED ===
+[2026-02-01T19:34:17.389Z] [INFO] Creating RelayEditor...
+[2026-02-01T19:34:17.389Z] [INFO] Initializing relay components...
+[2026-02-01T19:34:17.389Z] [INFO] Parsed config: {
+  "port": 9001,
+  "editorPid": "116516",
+  "shutdownDelaySeconds": 180
+}
+[2026-02-01T19:34:17.389Z] [INFO] Command line arguments: [
+  "bun",
+  "B:/~BUN/root/relay_win.exe",
+  "9001",
+  "116516",
+  "180"
+]
+[2026-02-01T19:34:17.389Z] [INFO] Starting relay server...
+[2026-02-01T19:34:17.393Z] [INFO] WebSocket server started
+[2026-02-01T19:34:17.394Z] [INFO] Relay server initialization completed
+[2026-02-01T19:34:18.371Z] [INFO] Unity client connected with ID: editor-116516-8pggv9
+[2026-02-01T19:35:35.787Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-01T19:35:35.788Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-01T19:35:35.790Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-01T19:36:09.318Z] [INFO] Unity client connected with ID: editor-116516-jdmgpy
+[2026-02-01T19:44:36.502Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-01T19:44:36.503Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-01T19:44:36.503Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-01T19:45:23.014Z] [INFO] Unity client connected with ID: editor-116516-44v2h2
+[2026-02-01T19:48:02.605Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-01T19:48:02.606Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-01T19:48:02.610Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-01T19:48:34.820Z] [INFO] Unity client connected with ID: editor-116516-scfh6t
+[2026-02-01T19:48:38.539Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-01T19:48:38.539Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-01T19:48:38.539Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-01T19:49:12.460Z] [INFO] Unity client connected with ID: editor-116516-zt0ibv
+[2026-02-01T21:01:25.412Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-01T21:01:25.413Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-01T21:01:25.414Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-01T21:02:35.311Z] [INFO] Unity client connected with ID: editor-116516-djtk17
+[2026-02-01T21:03:58.468Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-01T21:03:58.469Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-01T21:03:58.470Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-01T21:04:35.536Z] [INFO] Unity client connected with ID: editor-116516-i15xvs
+[2026-02-01T21:16:52.058Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-01T21:16:52.071Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-01T21:16:52.071Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-01T21:17:30.514Z] [INFO] Unity client connected with ID: editor-116516-u3qz05
+[2026-02-01T21:18:54.670Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-01T21:18:54.670Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-01T21:18:54.670Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-01T21:19:32.450Z] [INFO] Unity client connected with ID: editor-116516-8rj8a8
+[2026-02-01T21:24:50.793Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-01T21:24:50.793Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-01T21:24:50.793Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-01T21:27:15.430Z] [INFO] Unity client connected with ID: editor-116516-11yai3
+[2026-02-01T21:28:56.039Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-01T21:28:56.039Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-01T21:28:56.039Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-01T21:29:36.203Z] [INFO] Unity client connected with ID: editor-116516-eg60ax
+[2026-02-01T21:37:03.336Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-01T21:37:03.337Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-01T21:37:03.337Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-01T21:40:03.357Z] [INFO] Shutdown: Initiating graceful shutdown: Dedicated client disconnected
