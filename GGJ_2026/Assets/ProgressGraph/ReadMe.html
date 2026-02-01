@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ProgressGraph – Lightweight Game Progress Toolkit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: #f7f7f8;
+            color: #222;
+        }
+
+        header {
+            background: #1f2933;
+            color: #fff;
+            padding: 2.5rem 1.5rem;
+        }
+
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2rem;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        h2 {
+            margin-top: 3rem;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            margin-top: 2rem;
+        }
+
+        code, pre {
+            font-family: Consolas, Monaco, monospace;
+            background: #111827;
+            color: #e5e7eb;
+        }
+
+        pre {
+            padding: 1rem;
+            overflow-x: auto;
+            border-radius: 6px;
+            margin: 1rem 0;
+        }
+
+        code.inline {
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+
+        ul {
+            margin-left: 1.5rem;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>ProgressGraph</h1>
+    <p>Deterministic game progress tracking without a framework</p>
+</header>
+
+<main>
+
+    <h2>Overview</h2>
+
+    <p>
+        <strong>ProgressGraph</strong> is a lightweight runtime toolkit for tracking, validating,
+        and persisting game progress using named flags and explicit dependency rules.
+    </p>
+
+    <p>
+        It is <strong>not</strong> a quest system, dialogue system, or gameplay framework.
+        ProgressGraph provides a clean, deterministic layer for answering questions like:
+    </p>
+
+    <ul>
+        <li>Has this event already happened?</li>
+        <li>Can this action occur yet?</li>
+        <li>What progress conditions are missing?</li>
+    </ul>
+
+    <h2>Core Concepts</h2>
+
+    <h3>Progress Flags</h3>
+
+    <p>
+        A <strong>progress flag</strong> represents a discrete piece of game state.
+    </p>
+
+    <p>Examples:</p>
+    <ul>
+        <li><code class="inline">Boss.Defeated.Factory</code></li>
+        <li><code class="inline">Key.Collected.Red</code></li>
+        <li><code class="inline">Tutorial.Completed</code></li>
+        <li><code class="inline">Door.Opened.MainGate</code></li>
+    </ul>
+
+    <p>Flags are:</p>
+    <ul>
+        <li>Identified by string IDs</li>
+        <li>Boolean in value</li>
+        <li>Serializable</li>
+        <li>Explicitly controlled</li>
+    </ul>
+
+    <pre><code>Progress.DefineFlag("Boss.Defeated.Factory");</code></pre>
+
+    <h3>One-Way vs Reversible Flags</h3>
+
+    <p>
+        By default, flags are <strong>one-way</strong>. Once set, they cannot be unset.
+    </p>
+
+    <pre><code>Progress.DefineFlag("Boss.Defeated.Factory", oneWay: true);</code></pre>
+
+    <p>
+        Reversible flags allow toggling and are useful for world states:
+    </p>
+
+    <pre><code>Progress.DefineFlag("Area.Power.On", oneWay: false);</code></pre>
+
+    <h3>Dependencies</h3>
+
+    <p>
+        Flags may declare <strong>dependencies</strong> on other flags.
+        A flag cannot be set unless all its requirements are met.
+    </p>
+
+    <pre><code>Progress.Require("Door.Opened", "Key.Collected");</code></pre>
+
+    <h2>Public API Summary</h2>
+
+    <h3>Defining Flags</h3>
+
+    <pre><code>Progress.DefineFlag("Key.Collected");
+Progress.DefineFlag("Door.Opened");</code></pre>
+
+    <h3>Declaring Dependencies</h3>
+
+    <pre><code>Progress.Require("Door.Opened", "Key.Collected");</code></pre>
+
+    <h3>Querying State</h3>
+
+    <pre><code>Progress.IsSet("Key.Collected");
+Progress.CanSet("Door.Opened");</code></pre>
+
+    <h3>Inspecting Missing Requirements</h3>
+
+    <pre><code>var unmet = Progress.GetUnmetRequirements("Door.Opened");
+
+foreach (var req in unmet)
+{
+    Debug.Log($"Missing: {req}");
+}</code></pre>
+
+    <h3>Setting and Resetting Flags</h3>
+
+    <pre><code>Progress.Set("Key.Collected");
+Progress.Set("Door.Opened");</code></pre>
+
+    <pre><code>Progress.Reset("Area.Power.On"); // Only if reversible</code></pre>
+
+    <h3>Resetting All Progress</h3>
+
+    <pre><code>Progress.ResetAll();</code></pre>
+
+    <p>
+        This clears all flag states without removing definitions or dependencies.
+    </p>
+
+    <h2>Save &amp; Load Integration</h2>
+
+    <p>
+        ProgressGraph does not enforce a save system.
+        Instead, it exposes a <strong>snapshot</strong> that can be saved using any solution.
+    </p>
+
+    <h3>Export</h3>
+
+    <pre><code>ProgressSnapshot snapshot = Progress.Export();</code></pre>
+
+    <h3>Import</h3>
+
+    <pre><code>Progress.ResetAll();
+Progress.Import(snapshot);</code></pre>
+
+    <p>
+        This design ensures explicit lifecycle control and compatibility with any save framework.
+    </p>
+
+    <h2>What This Asset Is Not</h2>
+
+    <p>ProgressGraph intentionally does not include:</p>
+
+    <ul>
+        <li>Quest definitions</li>
+        <li>Dialogue trees</li>
+        <li>Visual editors</li>
+        <li>UI systems</li>
+        <li>Timeline logic</li>
+        <li>Save file management</li>
+    </ul>
+
+    <p>
+        It is designed to integrate cleanly with custom gameplay code.
+    </p>
+
+    <h2>Recommended Usage</h2>
+
+    <p>ProgressGraph works best as:</p>
+
+    <ul>
+        <li>A foundation layer for quests or objectives</li>
+        <li>A world-state tracking system</li>
+        <li>A replacement for scattered boolean logic</li>
+        <li>A debugging aid for progression logic</li>
+    </ul>
+
+</main>
+
+<footer>
+    <p>ProgressGraph — Lightweight Game Progress Toolkit for Unity</p>
+</footer>
+
+</body>
+</html>
