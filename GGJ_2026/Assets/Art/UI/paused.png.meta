@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 079ba8ea2f5a2b54bb0eeb66f2f0b1bb
+guid: c0c628e53c798ff469183cb7920bac47
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -94,19 +94,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -123,89 +110,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Idle character spread sheet_0
+      name: paused_0
       rect:
         serializedVersion: 2
-        x: 361
-        y: 117
-        width: 139
-        height: 275
-      alignment: 9
-      pivot: {x: 0.5, y: 0}
+        x: 0
+        y: 0
+        width: 400
+        height: 550
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f9f3ab1b98fda74aa7889bd17fd5209
-      internalID: -511360268
+      spriteID: 01278476cb697ac4ea8496f87c398ebb
+      internalID: 432881517
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle character spread sheet_1
+      name: paused_1
       rect:
         serializedVersion: 2
-        x: 617
-        y: 119
-        width: 139
-        height: 271
-      alignment: 9
-      pivot: {x: 0.5, y: 0}
+        x: 0
+        y: 0
+        width: 400
+        height: 550
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dafe83d655eb60c45b08860f4a84d013
-      internalID: 1836183585
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Idle character spread sheet_2
-      rect:
-        serializedVersion: 2
-        x: 881
-        y: 121
-        width: 139
-        height: 275
-      alignment: 9
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fccf2c59e30028447a08f0e0ff780fd2
-      internalID: -281363239
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Idle character spread sheet_3
-      rect:
-        serializedVersion: 2
-        x: 1137
-        y: 122
-        width: 139
-        height: 271
-      alignment: 9
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e31f69cf45228704dbea3eab527368fd
-      internalID: 760321710
+      spriteID: f83afb07c9885dc4cae42f7d3f5f56df
+      internalID: 1284599168
       vertices: []
       indices: 
       edges: []
@@ -214,7 +157,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 89a6c0535bd393448909e9efcf760132
+    spriteID: 16184f7ca0babbf4b838388f8f7364e8
     internalID: 0
     vertices: []
     indices: 
@@ -222,14 +165,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      Idle character spread sheet_0: -511360268
-      Idle character spread sheet_1: 1836183585
-      Idle character spread sheet_2: -281363239
-      Idle character spread sheet_3: 760321710
+      paused_0: 432881517
+      paused_1: 1284599168
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
