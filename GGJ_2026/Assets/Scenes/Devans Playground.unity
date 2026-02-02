@@ -713,21 +713,9 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 339433256}
-    - target: {fileID: 1290087625352135958, guid: dde3040b721ac1a40b861e181fb81436, type: 3}
-      propertyPath: damageMask.m_Bits
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 1668864428305675352, guid: dde3040b721ac1a40b861e181fb81436, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3198424397545517757, guid: dde3040b721ac1a40b861e181fb81436, type: 3}
       propertyPath: m_Name
       value: BadGuy
-      objectReference: {fileID: 0}
-    - target: {fileID: 3398932834631690886, guid: dde3040b721ac1a40b861e181fb81436, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5196836516801500961, guid: dde3040b721ac1a40b861e181fb81436, type: 3}
       propertyPath: m_LocalPosition.x
@@ -767,10 +755,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5196836516801500961, guid: dde3040b721ac1a40b861e181fb81436, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8111752679321847147, guid: dde3040b721ac1a40b861e181fb81436, type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

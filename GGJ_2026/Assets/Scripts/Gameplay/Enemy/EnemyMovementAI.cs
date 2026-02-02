@@ -84,8 +84,7 @@ public class EnemyMovementAI : MonoBehaviour
             return;
         }
 
-        AttackSide side = transform.position.x < playerTransform.position.x ? AttackSide.Left : AttackSide.Right;
-
+        AttackSide side = transform.position.x < playerTransform.position.x ? AttackSide.Right : AttackSide.Left;
         if (hasTicket && Time.time >= holdUntilTime && !isAttacking)
             ReleaseTicket();
 
