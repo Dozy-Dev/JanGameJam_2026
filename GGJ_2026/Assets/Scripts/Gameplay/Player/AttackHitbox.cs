@@ -3,13 +3,23 @@ using UnityEngine;
 
 public class AttackHitbox : MonoBehaviour
 {
-    [Header("Tuning")]
-    [SerializeField] private int damage = 1;
-    [SerializeField] private float knockbackForce = 3f;
+    [SerializeField] private Collider2D hitCollider;
+    [SerializeField] private LayerMask damageMask;
 
     private readonly HashSet<int> hitIdsThisSwing = new();
     private Transform owner;
-    private bool facingRight = true;
+    private bool facingRight;
+    private int damage;
+    private float knockbackForce;
+    private bool armed;
+
+    private readonly Collider2D[] results = new Collider2D[16];
+
+    private void Awake()
+    {
+        if (hitCollider == null) hitCollider = GetComponent<Collider2D>();
+        hitCollider.enabled = false;
+    }
 
     public void Arm(Transform ownerTransform, bool facingRightNow, int dmg, float kb)
     {
@@ -17,25 +27,49 @@ public class AttackHitbox : MonoBehaviour
         facingRight = facingRightNow;
         damage = dmg;
         knockbackForce = kb;
+
         hitIdsThisSwing.Clear();
-        gameObject.SetActive(true);
+        armed = true;
+        hitCollider.enabled = true;
+
+        ScanOnce(); 
     }
 
     public void Disarm()
     {
-        gameObject.SetActive(false);
+        armed = false;
+        hitCollider.enabled = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void FixedUpdate()
     {
-        int id = other.GetInstanceID();
-        if (!hitIdsThisSwing.Add(id))
-            return;
+        if (!armed) return;
+        ScanOnce();
+    }
 
-        if (other.TryGetComponent<IDamageable>(out var dmgTarget))
+    private void ScanOnce()
+    {
+        int count = Physics2D.OverlapCollider(hitCollider, new ContactFilter2D
         {
-            Vector2 dir = facingRight ? Vector2.right : Vector2.left;
+            useLayerMask = true,
+            layerMask = damageMask,
+            useTriggers = true
+        }, results);
 
+        for (int i = 0; i < count; i++)
+        {
+            var c = results[i];
+            if (c == null) continue;
+
+            Debug.Log(c.name);
+
+            int id = c.GetInstanceID();
+            if (!hitIdsThisSwing.Add(id)) continue;
+
+            var dmgTarget = c.GetComponentInParent<IDamageable>();
+            if (dmgTarget == null) continue;
+
+            Vector2 dir = facingRight ? Vector2.right : Vector2.left;
             dmgTarget.TakeDamage(new DamageInfo
             {
                 Amount = damage

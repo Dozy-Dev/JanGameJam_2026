@@ -30,8 +30,8 @@ public class PlayerMovementController : MonoBehaviour
     [Header("Combat")]
     [SerializeField] private AttackHitbox punchHitbox;
     [SerializeField] private AttackHitbox kickHitbox;
-    [SerializeField] private float punchActiveTime = 0.12f;
-    [SerializeField] private float kickActiveTime = 0.14f;
+    private float punchActiveTime = 0.2f;
+    private float kickActiveTime = 0.2f;
     [SerializeField] private int punchDamage = 1;
     [SerializeField] private int kickDamage = 2;
     [SerializeField] private float knockbackForce = 3f;
