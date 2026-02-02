@@ -638,10 +638,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BadGuy
       objectReference: {fileID: 0}
-    - target: {fileID: 3198424397545517757, guid: dde3040b721ac1a40b861e181fb81436, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 5196836516801500961, guid: dde3040b721ac1a40b861e181fb81436, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.09

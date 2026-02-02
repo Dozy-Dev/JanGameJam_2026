@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))] 
+[RequireComponent(typeof(Rigidbody2D))]
 public class EnemyMovementAI : MonoBehaviour
 {
     [Header("Player Target")]
@@ -11,26 +11,42 @@ public class EnemyMovementAI : MonoBehaviour
     [SerializeField] private int ticketCostPoints = 1;
 
     [Header("Distance From Player")]
-    [SerializeField] private float desiredRingMin = 1.5f;
-    [SerializeField] private float desiredRingMax = 2.5f;
-    [SerializeField] private float attackRange = 1f;
-    [SerializeField] private float tetherRange = 5f;
+    [SerializeField] private float desiredRingMin = 1.8f;
+    [SerializeField] private float desiredRingMax = 2.8f;
+    [SerializeField] private float attackRange = 1.1f;
+    [SerializeField] private float tetherRange = 7f;
 
     [Header("Move Speeds")]
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float accelRate = 10f;
+    [SerializeField] private float accelRate = 20f;
     [SerializeField] private float deadZone = 0.05f;
 
-    [Header("Timings or something idk")]
-    [SerializeField] private float ticketRequestRetryInterval = 1f;
-    [SerializeField] private float maxTimeWithTicket = 10f;
+    [Header("Attack (Placeholder)")]
+    [SerializeField] private AttackHitbox attackHitbox; 
+    [SerializeField] private int attackDamage = 1;
+    [SerializeField] private float knockbackForce = 3f;
+    [SerializeField] private float attackWindup = 0.10f;
+    [SerializeField] private float attackActive = 0.12f;
+    [SerializeField] private float attackCooldown = 0.45f;
+
+    [Header("Ticket Timings")]
+    [SerializeField] private float ticketRequestRetryInterval = 0.6f;
+    [SerializeField] private float maxTimeWithTicket = 4f;
+
+    [Header("Anti-push")]
+    [SerializeField] private float minSeparationBuffer = 0.15f; 
 
     private Rigidbody2D rb;
     private Guid ticketID;
-    private float nextTicketRequestTime = 0f;
-    private float holdUntilTime = 0f;
-    private bool hasTicket = false;
-    private bool hasReachedPlayer = false;
+
+    private float nextTicketRequestTime;
+    private float holdUntilTime;
+
+    private bool hasTicket;
+    private bool isAttacking;
+    private float nextAttackAllowedTime;
+
+    private float ringNoiseSeed;
 
     private void Awake()
     {
@@ -42,18 +58,13 @@ public class EnemyMovementAI : MonoBehaviour
     private void OnEnable()
     {
         hasTicket = false;
+        isAttacking = false;
+        nextAttackAllowedTime = 0f;
         holdUntilTime = 0f;
     }
 
-    private void OnDisable()
-    {
-        ReleaseTicket();
-    }
-
-    private void OnDestroy()
-    {
-        ReleaseTicket();
-    }
+    private void OnDisable() => ReleaseTicket();
+    private void OnDestroy() => ReleaseTicket();
 
     private void FixedUpdate()
     {
@@ -63,10 +74,10 @@ public class EnemyMovementAI : MonoBehaviour
             return;
         }
 
-        Vector2 toPlayer = playerTransform.position - transform.position;
-        float distanceToPlayer = toPlayer.magnitude;
+        Vector2 toPlayer = (Vector2)(playerTransform.position - transform.position);
+        float dist = toPlayer.magnitude;
 
-        if(distanceToPlayer > tetherRange && hasReachedPlayer)
+        if (dist > tetherRange)
         {
             ReleaseTicket();
             rb.linearVelocity = Vector2.zero;
@@ -75,52 +86,107 @@ public class EnemyMovementAI : MonoBehaviour
 
         AttackSide side = transform.position.x < playerTransform.position.x ? AttackSide.Left : AttackSide.Right;
 
-        if (hasTicket && Time.time > holdUntilTime && distanceToPlayer > attackRange * 0.9f)
-        {
-            //Still engaging and reserved to fight the player, idk what to do here yet
-        }
-        else if (hasTicket && Time.time >= holdUntilTime && distanceToPlayer <= attackRange)
-        {
-            //We're in attack range, hold and then release.
-            hasReachedPlayer = true;
+        if (hasTicket && Time.time >= holdUntilTime && !isAttacking)
             ReleaseTicket();
-        }
 
-        if (!hasTicket && Time.time >= nextTicketRequestTime)
+        if (!hasTicket && !isAttacking && Time.time >= nextTicketRequestTime)
         {
             nextTicketRequestTime = Time.time + ticketRequestRetryInterval;
 
-            if(AttackTicketManager.Instance.TryAcquireTicket(ticketID, side, ticketCostPoints, out var ticket))
+            if (AttackTicketManager.Instance.TryAcquireTicket(ticketID, side, ticketCostPoints, out _))
             {
                 hasTicket = true;
                 holdUntilTime = Time.time + maxTimeWithTicket;
             }
         }
 
-        float desiredDistance = hasTicket ? attackRange : RandomRingDistanceStable();
+        if (isAttacking)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
 
-        float delta = distanceToPlayer - desiredDistance;
+        float minTouchDist = ComputeMinTouchDistance() + minSeparationBuffer;
+
+        float desiredDist;
+        if (hasTicket)
+            desiredDist = Mathf.Max(minTouchDist, attackRange);
+        else
+            desiredDist = Mathf.Max(minTouchDist, RandomRingDistanceStable());
+
+        if (hasTicket && dist <= desiredDist + 0.02f && Time.time >= nextAttackAllowedTime)
+        {
+            StartCoroutine(DoAttack(side));
+            return;
+        }
+
+        float delta = dist - desiredDist;
 
         Vector2 desiredVel = Vector2.zero;
         if (Mathf.Abs(delta) > deadZone)
         {
             Vector2 dir = toPlayer.normalized;
-            desiredVel = dir * Mathf.Sign(delta) * moveSpeed;
+
+            float sign = Mathf.Sign(delta);
+            desiredVel = dir * sign * moveSpeed;
+
+            if (sign < 0f) desiredVel *= 1.2f;
         }
 
-        Vector2 v = rb.linearVelocity;
-        Vector2 newV = Vector2.MoveTowards(v, desiredVel, accelRate * Time.fixedDeltaTime);
-        rb.linearVelocity = newV;
+        rb.linearVelocity = Vector2.MoveTowards(rb.linearVelocity, desiredVel, accelRate * Time.fixedDeltaTime);
     }
 
-    private float ringNoiseSeed;
+    private System.Collections.IEnumerator DoAttack(AttackSide side)
+    {
+        isAttacking = true;
+        rb.linearVelocity = Vector2.zero;
+
+        yield return new WaitForSeconds(attackWindup);
+
+        if (attackHitbox != null)
+        {
+            bool facingRight = side == AttackSide.Left; 
+            attackHitbox.Arm(transform, facingRight, attackDamage, knockbackForce);
+            yield return new WaitForSeconds(attackActive);
+            attackHitbox.Disarm();
+        }
+        else
+        {
+            yield return new WaitForSeconds(attackActive);
+        }
+
+        ReleaseTicket();
+
+        nextAttackAllowedTime = Time.time + attackCooldown;
+
+        isAttacking = false;
+    }
+
     private float RandomRingDistanceStable()
     {
         if (ringNoiseSeed == 0f)
             ringNoiseSeed = UnityEngine.Random.Range(0.1f, 1000f);
+
         float t = Time.time * 0.9f + ringNoiseSeed;
         float lerp = (Mathf.Sin(t) + 1f) * 0.5f;
         return Mathf.Lerp(desiredRingMin, desiredRingMax, lerp);
+    }
+
+    private float ComputeMinTouchDistance()
+    {
+        float a = GetApproxRadius(gameObject);
+        float b = playerTransform != null ? GetApproxRadius(playerTransform.gameObject) : 0.5f;
+        return a + b;
+    }
+
+    private float GetApproxRadius(GameObject go)
+    {
+        if (go.TryGetComponent<Collider2D>(out var col))
+        {
+            var bounds = col.bounds;
+            return Mathf.Max(bounds.extents.x, bounds.extents.y);
+        }
+        return 0.5f;
     }
 
     private void ReleaseTicket()
@@ -130,11 +196,5 @@ public class EnemyMovementAI : MonoBehaviour
 
         AttackTicketManager.Instance.ReleaseTicket(ticketID);
         hasTicket = false;
-        hasReachedPlayer = false;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log(collision.gameObject.name);
     }
 }
