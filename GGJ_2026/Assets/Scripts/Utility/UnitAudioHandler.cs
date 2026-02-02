@@ -27,6 +27,7 @@ public class UnitAudioHandler : MonoBehaviour
             // Choose a random sound from the array
             AudioClip clip = footstepSounds[Random.Range(0, footstepSounds.Length)];
             // Play the clip as a one-shot so it doesn't interrupt existing sounds
+            audioSource.pitch = Random.Range(0.85f, 1.25f);
             audioSource.PlayOneShot(clip);
         }
     }
@@ -38,6 +39,7 @@ public class UnitAudioHandler : MonoBehaviour
             // Choose a random sound from the array
             AudioClip clip = lightAttackSounds[Random.Range(0, lightAttackSounds.Length)];
             // Play the clip as a one-shot so it doesn't interrupt existing sounds
+            audioSource.pitch = Random.Range(0.85f, 1.25f);
             audioSource.PlayOneShot(clip);
         }
     }
@@ -49,6 +51,7 @@ public class UnitAudioHandler : MonoBehaviour
             // Choose a random sound from the array
             AudioClip clip = heavyAttackSounds[Random.Range(0, heavyAttackSounds.Length)];
             // Play the clip as a one-shot so it doesn't interrupt existing sounds
+            audioSource.pitch = Random.Range(0.85f, 1.25f);
             audioSource.PlayOneShot(clip);
         }
     }
@@ -59,6 +62,7 @@ public class UnitAudioHandler : MonoBehaviour
             // Choose a random sound from the array
             AudioClip clip = hitSounds[Random.Range(0, hitSounds.Length)];
             // Play the clip as a one-shot so it doesn't interrupt existing sounds
+            audioSource.pitch = Random.Range(0.85f, 1.25f);
             audioSource.PlayOneShot(clip);
         }
     } 
