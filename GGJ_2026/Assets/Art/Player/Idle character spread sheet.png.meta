@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f4ad919860bef0546ad355cb03cf602e
+guid: 079ba8ea2f5a2b54bb0eeb66f2f0b1bb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Dead_0
+      name: Idle character spread sheet_0
       rect:
         serializedVersion: 2
-        x: 499
-        y: 160
-        width: 1065
-        height: 486
+        x: 361
+        y: 117
+        width: 139
+        height: 275
       alignment: 9
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -138,8 +138,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7720994beef1f1441809383e38bd95ab
-      internalID: -1013245661
+      spriteID: 4f9f3ab1b98fda74aa7889bd17fd5209
+      internalID: -511360268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle character spread sheet_1
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 119
+        width: 139
+        height: 271
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dafe83d655eb60c45b08860f4a84d013
+      internalID: 1836183585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle character spread sheet_2
+      rect:
+        serializedVersion: 2
+        x: 881
+        y: 121
+        width: 139
+        height: 275
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fccf2c59e30028447a08f0e0ff780fd2
+      internalID: -281363239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle character spread sheet_3
+      rect:
+        serializedVersion: 2
+        x: 1137
+        y: 122
+        width: 139
+        height: 271
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e31f69cf45228704dbea3eab527368fd
+      internalID: 760321710
       vertices: []
       indices: 
       edges: []
@@ -148,7 +214,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 6bfce48fb5b033b41899d6330269d24c
+    spriteID: 89a6c0535bd393448909e9efcf760132
     internalID: 0
     vertices: []
     indices: 
@@ -160,7 +226,10 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Dead_0: -1013245661
+      Idle character spread sheet_0: -511360268
+      Idle character spread sheet_1: 1836183585
+      Idle character spread sheet_2: -281363239
+      Idle character spread sheet_3: 760321710
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -8,7 +8,8 @@ public enum GameEvent
     PlayerWon,
     PlayerTakeDamage,
     PlayerHeal,
-    Paused
+    Paused,
+    EnemyDied
 }
 
 public class GameEventSystem : MonoBehaviour

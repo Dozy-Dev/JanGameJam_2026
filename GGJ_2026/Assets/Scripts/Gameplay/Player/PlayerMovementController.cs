@@ -27,6 +27,15 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private InputActionReference punchAction;
     [SerializeField] private InputActionReference kickAction;
 
+    [Header("Combat")]
+    [SerializeField] private AttackHitbox punchHitbox;
+    [SerializeField] private AttackHitbox kickHitbox;
+    [SerializeField] private float punchActiveTime = 0.12f;
+    [SerializeField] private float kickActiveTime = 0.14f;
+    [SerializeField] private int punchDamage = 1;
+    [SerializeField] private int kickDamage = 2;
+    [SerializeField] private float knockbackForce = 3f;
+
     public bool FacingRight { get; private set; } = true;
 
     [Header("Placeholder Wiggle (DOTween)")]
@@ -52,26 +61,30 @@ public class PlayerMovementController : MonoBehaviour
         visualStartLocalPos = visualRoot.localPosition;
         visualStartLocalRot = visualRoot.localRotation;
 
-        punchAction.ToInputAction().performed += ctx => PerformPunch();
-        kickAction.ToInputAction().performed += ctx => PerformKick();
+        if (punchAction != null) 
+            punchAction.action.performed += _ => PerformPunch();
+        if (kickAction != null) 
+            kickAction.action.performed += _ => PerformKick();
     }
 
     private void OnEnable()
     {
-        if (moveAction != null)
+        if (moveAction != null) 
             moveAction.action.Enable();
-
-        if(punchAction != null)
+        if (punchAction != null) 
             punchAction.action.Enable();
+        if (kickAction != null) 
+            kickAction.action.Enable();
     }
 
     private void OnDisable()
     {
-        if (moveAction != null)
+        if (moveAction != null) 
             moveAction.action.Disable();
-
-        if(punchAction != null)
+        if (punchAction != null) 
             punchAction.action.Disable();
+        if (kickAction != null) 
+            kickAction.action.Disable();
     }
 
     private void Update()
@@ -97,34 +110,43 @@ public class PlayerMovementController : MonoBehaviour
 
     private void PerformPunch()
     {
-        // player animation
-        if (visualRoot != null)
-        {
-            Animator anim;
-            if (visualRoot.TryGetComponent<Animator>(out anim))
-            {
-                anim.SetTrigger("Punch");
-            }
-        }
+        TryTriggerAnim("Punch");
+
+        if (punchHitbox != null)
+            StartCoroutine(DoHitboxWindow(punchHitbox, punchDamage, punchActiveTime));
     }
 
     private void PerformKick()
     {
-        if(visualRoot != null)
-        {
-            Animator anim;
-            if (visualRoot.TryGetComponent<Animator>(out anim))
-            {
-                anim.SetTrigger("Kick");
-            }
-        }
+        TryTriggerAnim("Kick");
+
+        if (kickHitbox != null)
+            StartCoroutine(DoHitboxWindow(kickHitbox, kickDamage, kickActiveTime));
+    }
+
+    private void TryTriggerAnim(string trigger)
+    {
+        if (visualRoot == null) return;
+        if (visualRoot.TryGetComponent<Animator>(out var anim))
+            anim.SetTrigger(trigger);
+    }
+
+    private System.Collections.IEnumerator DoHitboxWindow(AttackHitbox hitbox, int dmg, float activeTime)
+    {
+        hitbox.Arm(transform, FacingRight, dmg, knockbackForce);
+
+        yield return new WaitForSeconds(activeTime);
+
+        hitbox.Disarm();
     }
 
     private void ApplyMovement2D()
     {
         Vector2 input = moveInput;
         if (input.magnitude < inputDeadZone)
+        {
             input = Vector2.zero;
+        }
 
         if( visualRoot != null)
         {
