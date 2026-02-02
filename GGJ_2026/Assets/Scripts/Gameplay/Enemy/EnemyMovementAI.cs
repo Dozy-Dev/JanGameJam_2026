@@ -21,12 +21,12 @@ public class EnemyMovementAI : MonoBehaviour
     [SerializeField] private float accelRate = 20f;
     [SerializeField] private float deadZone = 0.05f;
 
-    [Header("Attack (Placeholder)")]
+    [Header("Attack")]
     [SerializeField] private AttackHitbox attackHitbox; 
     [SerializeField] private int attackDamage = 1;
     [SerializeField] private float knockbackForce = 3f;
     [SerializeField] private float attackWindup = 0.10f;
-    [SerializeField] private float attackActive = 0.12f;
+    private float attackActive = 0.2f;
     [SerializeField] private float attackCooldown = 0.45f;
 
     [Header("Ticket Timings")]
@@ -154,8 +154,6 @@ public class EnemyMovementAI : MonoBehaviour
         {
             yield return new WaitForSeconds(attackActive);
         }
-
-        ReleaseTicket();
 
         nextAttackAllowedTime = Time.time + attackCooldown;
 

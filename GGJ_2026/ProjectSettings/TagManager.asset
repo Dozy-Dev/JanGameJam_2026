@@ -15,7 +15,7 @@ TagManager:
   - Border
   - InteractionLayer
   - Enemy
-  - 
+  - Player
   - 
   - leafGround
   - 

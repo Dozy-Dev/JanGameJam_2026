@@ -329,7 +329,7 @@ MonoBehaviour:
   moveSpeed: 5
   accelRate: 10
   deadZone: 0.05
-  attackHitbox: {fileID: 0}
+  attackHitbox: {fileID: 1290087625352135958}
   attackDamage: 1
   knockbackForce: 3
   attackWindup: 0.1
