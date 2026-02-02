@@ -151,10 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c1d89b00ddae64d995391b05c1412e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackHitbox
-  hitCollider: {fileID: 8415484311210339859}
-  damageMask:
-    serializedVersion: 2
-    m_Bits: 512
+  attackRadius: 0.9
+  localOffset: {x: 0.8, y: 0}
+  ownerFaction: 1
 --- !u!1 &2259908793852798751
 GameObject:
   m_ObjectHideFlags: 0
