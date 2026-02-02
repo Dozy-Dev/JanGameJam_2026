@@ -1541,3 +1541,59 @@
 [2026-02-02T01:29:56.690Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
 [2026-02-02T01:29:56.692Z] [INFO] Auto-shutdown timer started due to client disconnection
 [2026-02-02T01:30:43.021Z] [INFO] Unity client connected with ID: editor-116516-tz4pev
+[2026-02-02T02:54:07.355Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-02T02:54:07.356Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-02T02:54:07.356Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-02T02:54:18.794Z] [INFO] Unity client connected with ID: editor-135876-6tbqt1
+[2026-02-02T03:06:02.737Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-02T03:06:02.736Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-02T03:06:02.737Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-02T03:06:14.133Z] [INFO] Unity client connected with ID: editor-135876-hvvxyp
+[2026-02-02T03:10:33.756Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-02T03:10:33.757Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-02T03:10:33.757Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-02T03:10:43.772Z] [INFO] Unity client connected with ID: editor-135876-cchqzc
+[2026-02-02T03:10:48.292Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-02T03:10:48.294Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-02T03:10:48.294Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-02T03:10:58.045Z] [INFO] Unity client connected with ID: editor-135876-1xqd6z
+[2026-02-02T03:11:47.375Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-02T03:11:47.375Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-02T03:11:47.376Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-02T03:11:57.051Z] [INFO] Unity client connected with ID: editor-135876-z2vcux
+[2026-02-02T03:15:54.975Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-02T03:15:54.987Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-02T03:15:54.987Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-02T03:16:06.345Z] [INFO] Unity client connected with ID: editor-135876-hq3vn9
+[2026-02-02T03:18:43.784Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-02T03:18:43.784Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-02T03:18:43.784Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-02T03:18:53.307Z] [INFO] Unity client connected with ID: editor-135876-xn975c
+[2026-02-02T04:32:22.195Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-02T04:32:22.194Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-02T04:32:22.196Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-02T04:32:31.114Z] [INFO] Unity client connected with ID: editor-135876-yia5mb
+[2026-02-02T04:36:19.406Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-02T04:36:19.407Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-02T04:36:19.407Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-02T04:36:27.867Z] [INFO] Unity client connected with ID: editor-135876-70v5sr
+[2026-02-02T04:36:48.603Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-02T04:36:48.604Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-02T04:36:48.604Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-02T04:36:58.521Z] [INFO] Unity client connected with ID: editor-135876-j69egg
+[2026-02-02T04:42:31.146Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-02T04:42:31.146Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-02T04:42:31.146Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-02T04:42:39.715Z] [INFO] Unity client connected with ID: editor-135876-891e5e
+[2026-02-02T04:45:50.424Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-02T04:45:50.424Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-02T04:45:50.424Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-02T04:46:31.719Z] [INFO] Unity client connected with ID: editor-135876-a215bd
+[2026-02-02T04:46:32.685Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-02T04:46:32.685Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-02T04:46:32.685Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-02T04:46:53.461Z] [INFO] Unity client connected with ID: editor-135876-chxegu
+[2026-02-02T04:47:29.200Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-02T04:47:29.200Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-02T04:47:29.200Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-02T04:47:44.915Z] [INFO] Unity client connected with ID: editor-135876-b2mr1q

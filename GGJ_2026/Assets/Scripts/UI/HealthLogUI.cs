@@ -3,12 +3,18 @@ using UnityEngine.UI;
 
 public class HealthLogUI : MonoBehaviour
 {
-    [SerializeField] private PlayerStats playerStats;
+    private PlayerStats playerStats;
+    
     [SerializeField] private Image[] lifeShrooms;
 
     [SerializeField] private Sprite[] lifeShroomSprites;
 
     private const int healthPerShroom = 2;
+
+    private void Awake()
+    {
+        playerStats = GameObject.FindFirstObjectByType<PlayerStats>();
+    }
     private void OnEnable()
     {
         playerStats.OnHealthChanged += UpdateLife;

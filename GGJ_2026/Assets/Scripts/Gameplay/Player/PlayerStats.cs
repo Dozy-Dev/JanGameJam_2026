@@ -4,7 +4,7 @@ using System;
 public class PlayerStats : MonoBehaviour
 {
     public int maxHealth = 10;
-    public int lives = 5;
+    public int lives = 1;
 
     public int CurrentHealth { get; private set; }
 
@@ -15,7 +15,7 @@ public class PlayerStats : MonoBehaviour
     {
         CurrentHealth = maxHealth;
         GameEventSystem.Instance.RegisterListener(GameEvent.PlayerTakeDamage,obj => TakeDamage((int) obj));
-        GameEventSystem.Instance.RegisterListener(GameEvent.PlayerHeal,obj => Heal((int) obj));
+        GameEventSystem.Instance.RegisterListener(GameEvent.PlayerHeal,obj => Heal((int)obj));
     }
 
     public void TakeDamage(int amount)
@@ -37,7 +37,7 @@ public class PlayerStats : MonoBehaviour
             CurrentHealth = maxHealth;
         }
 
-        OnHealthChanged?.Invoke(CurrentHealth);
+        OnHealthChanged.Invoke(CurrentHealth);
     }
 
     private void HandleDeath()
@@ -47,6 +47,7 @@ public class PlayerStats : MonoBehaviour
         if (lives <= 0)
         {
             OnPlayerDied?.Invoke();
+            GameEventSystem.Instance.TriggerEvent(GameEvent.PlayerDied);
         }
         else
         {
