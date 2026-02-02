@@ -1306,3 +1306,71 @@
 [2026-02-01T02:54:29.816Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
 [2026-02-01T02:54:29.816Z] [INFO] Auto-shutdown timer started due to client disconnection
 [2026-02-01T02:55:00.909Z] [INFO] Unity client connected with ID: editor-116516-rujdoo
+[2026-02-01T06:18:08.247Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-01T06:18:08.239Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-01T06:18:08.248Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-01T06:21:08.267Z] [INFO] Shutdown: Initiating graceful shutdown: Dedicated client disconnected
+[2026-02-01T06:24:18.558Z] [INFO] Parsed config: {
+  "port": 9001,
+  "editorPid": "85284",
+  "shutdownDelaySeconds": 180
+}
+[2026-02-01T06:24:18.557Z] [INFO] === RELAY SERVER STARTED ===
+[2026-02-01T06:24:18.558Z] [INFO] Creating RelayEditor...
+[2026-02-01T06:24:18.558Z] [INFO] Command line arguments: [
+  "bun",
+  "B:/~BUN/root/relay_win.exe",
+  "9001",
+  "85284",
+  "180"
+]
+[2026-02-01T06:24:18.558Z] [INFO] Initializing relay components...
+[2026-02-01T06:24:18.558Z] [INFO] Starting relay server...
+[2026-02-01T06:24:18.565Z] [INFO] WebSocket server started
+[2026-02-01T06:24:18.566Z] [INFO] Relay server initialization completed
+[2026-02-01T06:24:19.610Z] [INFO] Unity client connected with ID: editor-85284-c73qo5
+[2026-02-01T06:24:39.168Z] [INFO] Shutdown request received from client editor-85284-c73qo5
+[2026-02-01T06:24:39.168Z] [INFO] Unity client requested immediate shutdown - shutting down now, reason: Shutdown requested by client
+[2026-02-01T06:24:39.168Z] [INFO] Shutdown: Initiating graceful shutdown: Shutdown requested by client
+[2026-02-01T06:24:39.170Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-01T06:24:39.170Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-01T06:24:39.170Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-01T15:43:18.718Z] [INFO] Parsed config: {
+  "port": 9001,
+  "editorPid": "135876",
+  "shutdownDelaySeconds": 180
+}
+[2026-02-01T15:43:18.711Z] [INFO] === RELAY SERVER STARTED ===
+[2026-02-01T15:43:18.719Z] [INFO] Creating RelayEditor...
+[2026-02-01T15:43:18.719Z] [INFO] Initializing relay components...
+[2026-02-01T15:43:18.717Z] [INFO] Starting relay server...
+[2026-02-01T15:43:18.717Z] [INFO] Command line arguments: [
+  "bun",
+  "B:/~BUN/root/relay_win.exe",
+  "9001",
+  "135876",
+  "180"
+]
+[2026-02-01T15:43:18.739Z] [INFO] WebSocket server started
+[2026-02-01T15:43:18.740Z] [INFO] Relay server initialization completed
+[2026-02-01T15:43:20.416Z] [INFO] Unity client connected with ID: editor-135876-j1tzy9
+[2026-02-01T15:43:38.462Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-01T15:43:38.462Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-01T15:43:38.463Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-01T15:43:47.431Z] [INFO] Unity client connected with ID: editor-135876-xxiszo
+[2026-02-01T21:30:56.962Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-01T21:30:56.985Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-01T21:30:56.988Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-01T21:31:44.539Z] [INFO] Unity client connected with ID: editor-135876-7wb2s0
+[2026-02-01T23:26:24.469Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-01T23:26:24.493Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-01T23:26:24.490Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-01T23:26:35.919Z] [INFO] Unity client connected with ID: editor-135876-4lfv15
+[2026-02-01T23:57:54.911Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-01T23:57:54.914Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-01T23:57:54.915Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-01T23:58:08.486Z] [INFO] Unity client connected with ID: editor-135876-w65wlc
+[2026-02-02T00:01:32.396Z] [INFO] Client disconnected - blocking incoming messages and caching for replay
+[2026-02-02T00:01:32.397Z] [WARN] Client disconnected - cloud session will persist until auto-shutdown, reason: Client disconnected
+[2026-02-02T00:01:32.397Z] [INFO] Auto-shutdown timer started due to client disconnection
+[2026-02-02T00:01:41.080Z] [INFO] Unity client connected with ID: editor-135876-rs6af9
