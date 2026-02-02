@@ -1,11 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Faction { Player, Enemy }
+
 public class AttackHitbox : MonoBehaviour
 {
     [Header("Shape")]
     [SerializeField] private float attackRadius = 0.9f;
     [SerializeField] private Vector2 localOffset = new Vector2(0.8f, 0f);
+
+    [Header("Who owns this?")]
+    [SerializeField] private Faction ownerFaction = Faction.Player;
 
     private readonly HashSet<int> hitIdsThisSwing = new();
 
@@ -19,16 +24,14 @@ public class AttackHitbox : MonoBehaviour
         owner = ownerTransform;
         facingRight = facingRightNow;
         damage = dmg;
+
         hitIdsThisSwing.Clear();
         armed = true;
 
         CheckHits();
     }
 
-    public void Disarm()
-    {
-        armed = false;
-    }
+    public void Disarm() => armed = false;
 
     private void FixedUpdate()
     {
@@ -38,24 +41,38 @@ public class AttackHitbox : MonoBehaviour
 
     private void CheckHits()
     {
+        if (owner == null || CombatRegistry.Instance == null) return;
+
         Vector2 hitPoint = (Vector2)owner.position +
-                           new Vector2(facingRight ? localOffset.x : -localOffset.x,
-                                       localOffset.y);
+                           new Vector2(facingRight ? localOffset.x : -localOffset.x, localOffset.y);
 
-        var player = FindFirstObjectByType<PlayerHurtbox>();
-        if (player == null) return;
+        IReadOnlyList<IDamageable> targets =
+            ownerFaction == Faction.Player
+                ? CombatRegistry.Instance.Enemies
+                : CombatRegistry.Instance.Players;
 
-        float dist = Vector2.Distance(hitPoint, player.transform.position);
-
-        if (dist <= attackRadius)
+        for (int i = 0; i < targets.Count; i++)
         {
-            int id = player.GetInstanceID();
+            var t = targets[i];
+            if (t == null) continue;
+
+            var mb = t as MonoBehaviour;
+            if (mb != null && (mb.transform == owner || mb.transform.IsChildOf(owner)))
+                continue;
+
+            Vector2 targetPos = mb != null ? (Vector2)mb.transform.position : Vector2.zero;
+            float dist = Vector2.Distance(hitPoint, targetPos);
+
+            if (dist > attackRadius)
+                continue;
+
+            int id = mb != null ? mb.GetInstanceID() : t.GetHashCode();
             if (!hitIdsThisSwing.Add(id))
-                return;
+                continue;
 
             Vector2 dir = facingRight ? Vector2.right : Vector2.left;
 
-            player.TakeDamage(new DamageInfo
+            t.TakeDamage(new DamageInfo
             {
                 Amount = damage
             });
@@ -65,7 +82,7 @@ public class AttackHitbox : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = ownerFaction == Faction.Player ? Color.green : Color.red;
         Vector2 center = (Vector2)transform.position + localOffset;
         Gizmos.DrawWireSphere(center, attackRadius);
     }

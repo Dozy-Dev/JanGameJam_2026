@@ -7,6 +7,11 @@ public class EnemyMovementAI : MonoBehaviour
     [Header("Player Target")]
     [SerializeField] private Transform playerTransform;
 
+    [Header("Visuals")]
+    [SerializeField] private Transform visualRoot;
+    [SerializeField] private string moveSpeedParam = "MoveSpeed";
+    [SerializeField] private string punchTrigger = "Punch";
+
     [Header("Ticket Movement")]
     [SerializeField] private int ticketCostPoints = 1;
 
@@ -22,11 +27,11 @@ public class EnemyMovementAI : MonoBehaviour
     [SerializeField] private float deadZone = 0.05f;
 
     [Header("Attack")]
-    [SerializeField] private AttackHitbox attackHitbox; 
+    [SerializeField] private AttackHitbox attackHitbox;
     [SerializeField] private int attackDamage = 1;
     [SerializeField] private float knockbackForce = 3f;
     [SerializeField] private float attackWindup = 0.10f;
-    private float attackActive = 0.2f;
+    [SerializeField] private float attackActive = 0.20f;
     [SerializeField] private float attackCooldown = 0.45f;
 
     [Header("Ticket Timings")]
@@ -34,9 +39,10 @@ public class EnemyMovementAI : MonoBehaviour
     [SerializeField] private float maxTimeWithTicket = 4f;
 
     [Header("Anti-push")]
-    [SerializeField] private float minSeparationBuffer = 0.15f; 
+    [SerializeField] private float minSeparationBuffer = 0.15f;
 
     private Rigidbody2D rb;
+    private Animator anim;
     private Guid ticketID;
 
     private float nextTicketRequestTime;
@@ -48,11 +54,18 @@ public class EnemyMovementAI : MonoBehaviour
 
     private float ringNoiseSeed;
 
+    public bool FacingRight { get; private set; } = true;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
         ticketID = Guid.NewGuid();
+
+        if (visualRoot == null)
+            visualRoot = transform;
+
+        anim = visualRoot.GetComponentInChildren<Animator>();
     }
 
     private void OnEnable()
@@ -71,6 +84,7 @@ public class EnemyMovementAI : MonoBehaviour
         if (playerTransform == null || AttackTicketManager.Instance == null)
         {
             rb.linearVelocity = Vector2.zero;
+            SetMoveAnim(0f);
             return;
         }
 
@@ -81,10 +95,12 @@ public class EnemyMovementAI : MonoBehaviour
         {
             ReleaseTicket();
             rb.linearVelocity = Vector2.zero;
+            SetMoveAnim(0f);
             return;
         }
 
-        AttackSide side = transform.position.x < playerTransform.position.x ? AttackSide.Right : AttackSide.Left;
+        AttackSide side = transform.position.x < playerTransform.position.x ? AttackSide.Left : AttackSide.Right;
+
         if (hasTicket && Time.time >= holdUntilTime && !isAttacking)
             ReleaseTicket();
 
@@ -99,23 +115,25 @@ public class EnemyMovementAI : MonoBehaviour
             }
         }
 
+        float faceX = Mathf.Abs(rb.linearVelocity.x) > 0.05f ? rb.linearVelocity.x : toPlayer.x;
+        UpdateFacing(faceX);
+
         if (isAttacking)
         {
             rb.linearVelocity = Vector2.zero;
+            SetMoveAnim(0f);
             return;
         }
 
         float minTouchDist = ComputeMinTouchDistance() + minSeparationBuffer;
 
-        float desiredDist;
-        if (hasTicket)
-            desiredDist = Mathf.Max(minTouchDist, attackRange);
-        else
-            desiredDist = Mathf.Max(minTouchDist, RandomRingDistanceStable());
+        float desiredDist = hasTicket
+            ? Mathf.Max(minTouchDist, attackRange)
+            : Mathf.Max(minTouchDist, RandomRingDistanceStable());
 
         if (hasTicket && dist <= desiredDist + 0.02f && Time.time >= nextAttackAllowedTime)
         {
-            StartCoroutine(DoAttack(side));
+            StartCoroutine(DoAttack());
             return;
         }
 
@@ -133,19 +151,24 @@ public class EnemyMovementAI : MonoBehaviour
         }
 
         rb.linearVelocity = Vector2.MoveTowards(rb.linearVelocity, desiredVel, accelRate * Time.fixedDeltaTime);
+
+        SetMoveAnim(rb.linearVelocity.magnitude);
     }
 
-    private System.Collections.IEnumerator DoAttack(AttackSide side)
+    private System.Collections.IEnumerator DoAttack()
     {
         isAttacking = true;
         rb.linearVelocity = Vector2.zero;
+        SetMoveAnim(0f);
+
+        if (anim != null)
+            anim.SetTrigger(punchTrigger);
 
         yield return new WaitForSeconds(attackWindup);
 
         if (attackHitbox != null)
         {
-            bool facingRight = side == AttackSide.Left; 
-            attackHitbox.Arm(transform, facingRight, attackDamage, knockbackForce);
+            attackHitbox.Arm(transform, FacingRight, attackDamage, knockbackForce);
             yield return new WaitForSeconds(attackActive);
             attackHitbox.Disarm();
         }
@@ -154,9 +177,29 @@ public class EnemyMovementAI : MonoBehaviour
             yield return new WaitForSeconds(attackActive);
         }
 
-        nextAttackAllowedTime = Time.time + attackCooldown;
+        ReleaseTicket();
 
+        nextAttackAllowedTime = Time.time + attackCooldown;
         isAttacking = false;
+    }
+
+    private void SetMoveAnim(float speed)
+    {
+        if (anim == null) return;
+        anim.SetFloat(moveSpeedParam, speed);
+    }
+
+    private void UpdateFacing(float toPlayerX)
+    {
+        if (Mathf.Abs(toPlayerX) < 0.01f) return;
+
+        bool shouldFaceRight = toPlayerX > 0f;
+        if (shouldFaceRight == FacingRight) return;
+
+        FacingRight = shouldFaceRight;
+        Vector3 s = transform.localScale;
+        s.x = Mathf.Abs(s.x) * (FacingRight ? 1f : -1f);
+        transform.localScale = s;
     }
 
     private float RandomRingDistanceStable()
