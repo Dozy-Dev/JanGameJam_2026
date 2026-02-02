@@ -1,23 +1,23 @@
 using UnityEngine;
 using System;
 
-public class GameOverManager : MonoBehaviour
+public class WinScreenManager : MonoBehaviour
 {
-    public GameObject gameOverMenuUI;
-    private Action<object> gameOverListener;
+     public GameObject winScreenMenuUI;
+    private Action<object> winScreenListener;
 
     [SerializeField] private SceneController scenecontroller;
 
     private void Awake()
     {
-        gameOverMenuUI.SetActive(false);
+        winScreenMenuUI.SetActive(false);
 
-        gameOverListener = _ => GameOverUI();
-        GameEventSystem.Instance.RegisterListener(GameEvent.PlayerDied,gameOverListener);
+        winScreenListener = _ => WinScreenUI();
+        GameEventSystem.Instance.RegisterListener(GameEvent.PlayerWon,winScreenListener);
     }
-    void GameOverUI()
+    void WinScreenUI()
     {
-        gameOverMenuUI.SetActive(true);
+        winScreenMenuUI.SetActive(true);
         Time.timeScale = 0f;
     }
 
