@@ -3,77 +3,71 @@ using UnityEngine;
 
 public class AttackHitbox : MonoBehaviour
 {
-    [SerializeField] private Collider2D hitCollider;
-    [SerializeField] private LayerMask damageMask;
+    [Header("Shape")]
+    [SerializeField] private float attackRadius = 0.9f;
+    [SerializeField] private Vector2 localOffset = new Vector2(0.8f, 0f);
 
     private readonly HashSet<int> hitIdsThisSwing = new();
+
     private Transform owner;
     private bool facingRight;
     private int damage;
-    private float knockbackForce;
     private bool armed;
-
-    private readonly Collider2D[] results = new Collider2D[16];
-
-    private void Awake()
-    {
-        if (hitCollider == null) hitCollider = GetComponent<Collider2D>();
-        hitCollider.enabled = false;
-    }
 
     public void Arm(Transform ownerTransform, bool facingRightNow, int dmg, float kb)
     {
         owner = ownerTransform;
         facingRight = facingRightNow;
         damage = dmg;
-        knockbackForce = kb;
-
         hitIdsThisSwing.Clear();
         armed = true;
-        hitCollider.enabled = true;
 
-        ScanOnce(); 
+        CheckHits();
     }
 
     public void Disarm()
     {
         armed = false;
-        hitCollider.enabled = false;
     }
 
     private void FixedUpdate()
     {
         if (!armed) return;
-        ScanOnce();
+        CheckHits();
     }
 
-    private void ScanOnce()
+    private void CheckHits()
     {
-        int count = Physics2D.OverlapCollider(hitCollider, new ContactFilter2D
+        Vector2 hitPoint = (Vector2)owner.position +
+                           new Vector2(facingRight ? localOffset.x : -localOffset.x,
+                                       localOffset.y);
+
+        var player = FindFirstObjectByType<PlayerHurtbox>();
+        if (player == null) return;
+
+        float dist = Vector2.Distance(hitPoint, player.transform.position);
+
+        if (dist <= attackRadius)
         {
-            useLayerMask = true,
-            layerMask = damageMask,
-            useTriggers = true
-        }, results);
-
-        for (int i = 0; i < count; i++)
-        {
-            var c = results[i];
-            if (c == null) continue;
-
-            Debug.Log(c.name);
-
-            int id = c.GetInstanceID();
-            if (!hitIdsThisSwing.Add(id)) continue;
-
-            var dmgTarget = c.GetComponentInParent<IDamageable>();
-            if (dmgTarget == null) continue;
+            int id = player.GetInstanceID();
+            if (!hitIdsThisSwing.Add(id))
+                return;
 
             Vector2 dir = facingRight ? Vector2.right : Vector2.left;
-            dmgTarget.TakeDamage(new DamageInfo
+
+            player.TakeDamage(new DamageInfo
             {
                 Amount = damage
             });
         }
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Vector2 center = (Vector2)transform.position + localOffset;
+        Gizmos.DrawWireSphere(center, attackRadius);
+    }
+#endif
 }

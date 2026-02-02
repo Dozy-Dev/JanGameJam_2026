@@ -389,7 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c1d89b00ddae64d995391b05c1412e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackHitbox
-  hitCollider: {fileID: 0}
+  hitCollider: {fileID: 4769101529800656082}
   damageMask:
     serializedVersion: 2
     m_Bits: 256
@@ -646,7 +646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c1d89b00ddae64d995391b05c1412e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackHitbox
-  hitCollider: {fileID: 0}
+  hitCollider: {fileID: 1556390088759466890}
   damageMask:
     serializedVersion: 2
     m_Bits: 256

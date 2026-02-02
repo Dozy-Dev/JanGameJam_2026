@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7767715528097942907
 Transform:
   m_ObjectHideFlags: 0
@@ -42,7 +42,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1668864428305675352}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -151,8 +151,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c1d89b00ddae64d995391b05c1412e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackHitbox
-  damage: 1
-  knockbackForce: 3
+  hitCollider: {fileID: 8415484311210339859}
+  damageMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &2259908793852798751
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,7 +308,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &959270000014758987
 MonoBehaviour:
@@ -333,7 +335,6 @@ MonoBehaviour:
   attackDamage: 1
   knockbackForce: 3
   attackWindup: 0.1
-  attackActive: 0.12
   attackCooldown: 0.45
   ticketRequestRetryInterval: 1
   maxTimeWithTicket: 10
