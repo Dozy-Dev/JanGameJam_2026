@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [System.Serializable]
 public struct EnemySpawnObject
@@ -17,6 +18,8 @@ public class StageAdvanceZone : MonoBehaviour
     [SerializeField] private bool HasSpawned;
 
     [SerializeField] private int ToKill;
+
+    [SerializeField] private UnityEvent CompletionTrigger;
 
     private void Awake()
     {
@@ -62,8 +65,16 @@ public class StageAdvanceZone : MonoBehaviour
         if( ToKill == 0)
         {
             GameObject.FindFirstObjectByType<StagedCameraRig>().UnlockStage();
+            if(CompletionTrigger != null)
+            {
+                CompletionTrigger.Invoke();
+            }
             Destroy(gameObject);
         }
     }
 
+    public void EnemyDiedTEMP()
+    {
+        GameEventSystem.Instance.TriggerEvent(GameEvent.EnemyDied);
+    }
 }
